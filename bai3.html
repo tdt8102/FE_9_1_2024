@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải phương trình bậc 2</title>
+</head>
+<body>
+    <h1>Giải phương trình bậc 2 (Ax^2+Bx+c=0)</h1>
+
+    <form id="quadraticForm">
+        <label for="a">Nhập a:</label>
+        <input type="number" id="a" required>
+        <br>
+
+        <label for="b">Nhập b:</label>
+        <input type="number" id="b" required>
+        <br>
+
+        <label for="c">Nhập c:</label>
+        <input type="number" id="c" required>
+        <br>
+
+        <button type="button" onclick="solveEquation()">Giải phương trình</button>
+    </form>
+
+    <h2>Kết quả:</h2>
+    <p id="delta"></p>
+    <p id="result"></p>
+
+    <script>
+        function solveEquation() {
+            // Truy xuất giá trị từ form
+            var a = parseFloat(document.getElementById('a').value);
+            var b = parseFloat(document.getElementById('b').value);
+            var c = parseFloat(document.getElementById('c').value);
+
+            // Kiểm tra dữ liệu nhập vào
+            if (isNaN(a) || isNaN(b) || isNaN(c)) {
+                alert('Vui lòng nhập đúng giá trị cho a, b, và c.');
+                return;
+            }
+
+            // Tính delta
+            var delta = b * b - 4 * a * c;
+
+            // Tính kết quả
+            if (delta > 0) {
+                var x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                var x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                document.getElementById('delta').innerText = 'Delta = ' + delta;
+                document.getElementById('result').innerText = 'Phương trình có 2 nghiệm: x1 = ' + x1 + ', x2 = ' + x2;
+            } else if (delta == 0) {
+                var x = -b / (2 * a);
+                document.getElementById('delta').innerText = 'Delta = ' + delta;
+                document.getElementById('result').innerText = 'Phương trình có nghiệm kép: x = ' + x;
+            } else {
+                document.getElementById('delta').innerText = 'Delta = ' + delta;
+                document.getElementById('result').innerText = 'Phương trình không có nghiệm thực.';
+            }
+        }
+    </script>
+</body>
+</html>

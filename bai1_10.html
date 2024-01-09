@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form đăng ký người dùng</title>
+</head>
+<body>
+    <h1>Form đăng ký người dùng</h1>
+
+    <form action="" method="post" id="userForm">
+        <div class="row">
+            <label for="name">Họ và tên:</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+
+        <div class="row">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
+        </div>
+
+        <div class="row">
+            <label for="gender">Giới tính:</label>
+            <input type="radio" name="gender" id="male" value="male"> Nam
+            <input type="radio" name="gender" id="female" value="female"> Nữ
+        </div>
+
+        <div class="row">
+            <label for="dob">Ngày tháng năm sinh:</label>
+            <input type="date" name="dob" id="dob" required>
+        </div>
+
+        <div class="row">
+            <label for="zipcode">Mã bưu điện:</label>
+            <input type="text" name="zipcode" id="zipcode" required>
+        </div>
+
+        <div class="row">
+            <input type="button" value="Hoàn thành" id="finish">
+            <input type="reset" value="Xóa" id="clear">
+        </div>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Xử lý sự kiện khi nhấn nút Hoàn thành
+            $("#finish").click(function() {
+                // Lấy giá trị từ các trường nhập liệu
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var gender = $("input[name='gender']:checked").val();
+                var dob = $("#dob").val();
+                var zipcode = $("#zipcode").val();
+
+                // Kiểm tra dữ liệu
+                if (name === "" || email === "" || gender === "" || dob === "" || zipcode === "") {
+                    alert("Vui lòng điền đầy đủ thông tin.");
+                    return;
+                }
+
+                // Kiểm tra email
+                if (!/\S+@\S+\.\S+/.test(email)) {
+                    alert("Email không hợp lệ.");
+                    return;
+                }
+
+                // Kiểm tra năm sinh
+                var year = dob.substr(0, 4);
+                if (Number(year) > Number(new Date().getFullYear())) {
+                    alert("Năm sinh không hợp lệ.");
+                    return;
+                }
+
+                // Kiểm tra mã bưu điện
+                if (!/^\d{5}$/.test(zipcode)) {
+                    alert("Mã bưu điện không hợp lệ.");
+                    return;
+                }
+
+                // Nếu dữ liệu hợp lệ, bạn có thể thực hiện lưu dữ liệu hoặc công việc khác ở đây
+                alert("Dữ liệu hợp lệ. Bạn có thể lưu dữ liệu ở đây.");
+
+                // Gửi dữ liệu đến server (nếu cần)
+                // $("#userForm").submit();
+            });
+        });
+    </script>
+</body>
+</html>
